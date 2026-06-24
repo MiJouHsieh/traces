@@ -1,0 +1,121 @@
+{
+  "projectsInfo" : [
+    {
+      "id": "product-preview-card",
+      "title": "Product Preview Card",
+      "category": "Card UI",
+      "summary": "響應式商品預覽卡片，依螢幕寬度切換圖片與版面排列，還原設計稿字級、顏色與 spacing",
+      "image": "/images/12-product-preview-card.png",
+      "tags": ["React", "Vite", "Tailwind CSS", "RWD", "HTML picture"],
+      "highlights": [
+        "用原生 picture / source 依螢幕寬度切換不同比例圖片，而非單純用 CSS 縮放同一張",
+        "父層 overflow-hidden + rounded 統一裁切子元素，避免各斷點分別設定圓角的問題",
+        "w-full + max-w-* 組合讓卡片在手機有彈性、在大螢幕有最大寬度限制"
+      ],
+      "demo": "https://frontend-mentor-challenges-12-produ.vercel.app/",
+      "github": "https://github.com/MiJouHsieh/Frontend-Mentor-Challenges",
+      "notes": {
+        "problems": [
+          {
+            "title": "頁面變寬時切換較大的圖片",
+            "problem": "mobile 與 desktop 圖片比例不同，只用 CSS 裁切同一張圖片會與設計稿有落差",
+            "solution": "使用 HTML 原生 picture + source media，在 md 以上載入 desktop 圖片，小尺寸使用 mobile 圖片，再搭配 object-cover 控制顯示"
+          },
+          {
+            "title": "mobile 到 desktop 的容器寬度控制",
+            "problem": "固定寬度在手機不夠彈性，純 w-full 在大螢幕又會過度延展",
+            "solution": "父層用 px-* 控制手機版邊距，卡片用 w-full 搭配 max-w-[600px] 限制最大寬度"
+          },
+          {
+            "title": "卡片與圖片圓角銜接問題",
+            "problem": "圖片在不同斷點位於卡片上方或左側，分別設定圓角需處理多個角落的不同斷點",
+            "solution": "在卡片外層設定 overflow-hidden + rounded-[10px]，讓圖片自然被父層裁切，不需在子元素上個別處理圓角"
+          },
+          {
+            "title": "Tailwind 自訂設計系統",
+            "problem": "設計稿有自訂顏色、字體與文字樣式，若零散寫在各處後續難以維護",
+            "solution": "將顏色、字體與文字樣式整理進 Tailwind config，統一管理設計稿的 design token"
+          }
+        ]
+      }
+    },
+    {
+      "id": "time-tracking-dashboard",
+      "title": "Time Tracking Dashboard",
+      "category": "Dashboard",
+      "summary": "Daily / Weekly / Monthly 時間追蹤 Dashboard，JSON 資料渲染多張活動卡片，支援時間範圍切換",
+      "image": "/images/13-time-tracking-dashboard-responsive-preview.png",
+      "tags": ["React", "Vite", "Tailwind CSS", "JavaScript", "RWD"],
+      "highlights": [
+        "狀態提升：timeRange 放在父層 TimeDashboard，所有 TimeCard 共享同一時間範圍",
+        "資料與視覺設定分離：activityConfig.js 管理各活動背景色與 SVG icon，元件只負責接收 props 渲染",
+        "vite-plugin-svgr 將 SVG 作為 React component 匯入，用 Tailwind class 控制尺寸與位置"
+      ],
+      "demo": "https://13-time-tracking-dashboard.vercel.app/",
+      "github": "https://github.com/MiJouHsieh/Frontend-Mentor-Challenges",
+      "notes": {
+        "problems": [
+          {
+            "title": "Daily / Weekly / Monthly 切換資料",
+            "problem": "多張卡片各自有三種時間範圍資料，需要點擊 tab 後全部同步切換",
+            "solution": "將 timeRange 狀態提升至父層 TimeDashboard，再透過 activity.timeframes[timeRange] 讓所有 TimeCard 同步取得對應資料"
+          },
+          {
+            "title": "JSON 資料與卡片樣式如何對應",
+            "problem": "data.json 只有時間資料，每個活動還需要不同背景色與 icon，全寫在元件內會混亂",
+            "solution": "建立 activityConfig.js，以活動名稱為 key 對應 colorClass 與 Icon，再將 config 作為 props 傳入 TimeCard"
+          },
+          {
+            "title": "SVG icon 大小與位置調整",
+            "problem": "SVG 匯入後尺寸不符設計稿，不同 icon 視覺重心也不同",
+            "solution": "使用 vite-plugin-svgr 將 SVG 作為 React component 匯入，用 Tailwind class 控制尺寸與位置微調"
+          },
+          {
+            "title": "mobile / tablet / desktop 版面差異",
+            "problem": "三種斷點的 Dashboard 排列不同，不是單純縮放而是需要重新排列資訊層級",
+            "solution": "採用 Tailwind mobile-first 寫法，先完成 mobile 垂直排列，再逐步加上 tablet 多欄與 desktop Dashboard 版面的 grid 設定"
+          }
+        ]
+      }
+    },
+    {
+      "id": "job-listings-filtering2",
+      "title": "Job Listings with Filtering",
+      "category": "Filter UI",
+      "summary": "多條件 Tag 篩選職缺列表，支援 localStorage 保存篩選狀態",
+      "image": "/images/job-listings-responsive-preview.png",
+      "tags": ["React", "Vite", "Tailwind CSS", "localStorage"],
+      "highlights": [
+        "用 filter() + every() 實作多條件 Tag 篩選邏輯",
+        "狀態提升：多個元件共享 selectedFilters",
+        "lazy initial state 讓 localStorage 只在初次渲染讀取一次"
+      ],
+      "demo": "https://15-job-listings-with-filtering.vercel.app/",
+      "github": "https://github.com/MiJouHsieh/Frontend-Mentor-Challenges/tree/main/15-job-listings-with-filtering",
+      "notes": {
+        "problems": [
+          {
+            "title": "h-screen 讓背景高度不夠",
+            "problem": "內容超過視窗高度時背景色消失",
+            "solution": "改用 min-h-screen，讓容器隨內容撐開"
+          },
+          {
+            "title": "Tag 文字視覺上沒有垂直置中",
+            "problem": "技術上置中，但視覺上仍偏上",
+            "solution": "在文字加上 translate-y-[1px] 微調視覺位置"
+          },
+          {
+            "title": "Filter tag 圓角被子元素背景蓋過",
+            "problem": "子元素背景超出外層圓角範圍",
+            "solution": "外層加上 overflow-hidden 裁切子元素"
+          },
+          {
+            "title": "多 tag 篩選邏輯",
+            "problem": "需要判斷職缺是否符合所有已選 tag",
+            "solution": "將職缺 tags 合併成陣列，用 every() 判斷是否全部符合"
+          }
+        ]
+      }
+    }
+  ]
+}

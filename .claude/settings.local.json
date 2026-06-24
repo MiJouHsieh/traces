@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx shadcn@latest add card badge --yes)",
+      "Bash(npm ls *)",
+      "Bash(npm install *)"
+    ]
+  }
+}
