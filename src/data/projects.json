@@ -170,7 +170,7 @@
         "vite-plugin-svgr 將 SVG 作為 React component 匯入，用 Tailwind class 控制尺寸與位置"
       ],
       "demo": "https://13-time-tracking-dashboard.vercel.app/",
-      "github": "https://github.com/MiJouHsieh/Frontend-Mentor-Challenges",
+      "github": "https://github.com/MiJouHsieh/Frontend-Mentor-Challenges/tree/main/13-time-tracking-dashboard",
       "notes": {
         "problems": [
           {
@@ -201,7 +201,7 @@
       "title": "Job Listings with Filtering",
       "category": "Filter UI",
       "summary": "多條件 Tag 篩選職缺列表，支援 localStorage 保存篩選狀態",
-      "image": "/images/job-listings-responsive-preview.png",
+      "image": "/images/15-job-listings-responsive.png",
       "tags": ["React", "Vite", "Tailwind CSS", "localStorage"],
       "highlights": [
         "用 filter() + every() 實作多條件 Tag 篩選邏輯",
