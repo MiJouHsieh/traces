@@ -1,13 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
-
-
-
-@import url("https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap");
-
-
 
 @layer base {
   html,
@@ -23,17 +19,21 @@
 
 @layer utilities {
   .mobile-home-title {
-    @apply text-center text-[80px] font-normal leading-[92px] tracking-[0px] text-cyan-950;
+    @apply text-center text-[56px] font-normal leading-[92px] tracking-[0px] text-cyan-950;
   }
 
   .tablet-home-title {
     @apply text-center text-[144px] font-normal leading-[165px] tracking-[0px] text-cyan-950;
   }
 }
-  
-
 
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+  --breakpoint-375: 375px;
+  --breakpoint-1440: 1440px;
+  --width-375: 375px;   /* 這樣 min-w-375 才有效 */
+}
 
 @theme inline {
     --font-heading: var(--font-sans);
