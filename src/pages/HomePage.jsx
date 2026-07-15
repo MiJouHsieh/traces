@@ -1,17 +1,23 @@
 import { ProjectCard } from "@/components/ProjectCard";
 import projectsData from "@/data/projects.json";
 
-
 export function HomePage() {
   return (
     <main>
-      <h1 className="mobile-home-title md:tablet-home-title 1440:text-start">TRACES — Frontend Portfolio</h1>
-      <div className="1440:mt-[76px] mx-auto mt-14 mb-8 h-full w-full">
-        <div className="1440:gap-y-6 1440:flex-col 1440:w-[1110px] mx-auto flex w-full flex-wrap justify-center gap-10 md:w-[670px] md:justify-start md:gap-x-4">
+      <header className="flex flex-col justify-center">
+        <h1 className="mobile-home-title md:tablet-home-title 1440:text-start">
+          TRACES
+        </h1>
+        <p className="text-center">Mi's Frontend Portfolio</p>
+      </header>
+
+      <div className="1440:mt-[76px] mx-auto my-12 h-full w-full">
+        <div className="mx-auto grid w-full grid-cols-1 gap-8 md:w-[670px] md:grid-cols-2 md:gap-x-6 xl:w-[1110px]">
           {projectsData.projectsInfo.map((project) => {
             return (
               <ProjectCard
                 key={project.title}
+                id={project.id}
                 title={project.title}
                 summary={project.summary}
                 image={project.image}
