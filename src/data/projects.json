@@ -1,6 +1,124 @@
 {
   "projectsInfo" : [
     {
+      "id": "contact-form",
+      "title": "Contact Form",
+      "category": "Form",
+      "summary": "具完整驗證邏輯的聯絡表單，使用 Formik 管理欄位狀態、Yup 定義驗證規則，含客製化 radio 與 checkbox UI",
+      "image": "/images/08-contact-form.png",
+      "tags": ["React", "Vite", "Tailwind CSS", "Formik", "Yup", "RWD"],
+      "highlights": [
+        "Formik + Yup 分離狀態管理與驗證規則，initialValues / validationSchema / 欄位 name 三者對齊才能正確觸發錯誤訊息",
+        "useField({ type: 'checkbox' }) 取得含 checked 的欄位狀態，搭配條件渲染 SVG icon 取代不穩定的 peer-checked 巢狀結構",
+        "radio group 以相同 name 不同 value 實現互斥單選，選取值存入 Formik values.queryType，再動態切換外框與背景色"
+      ],
+      "demo": "https://frontend-mentor-challenges-08-contact-form.vercel.app/",
+      "github": "https://github.com/MiJouHsieh/Frontend-Mentor-Challenges/tree/main/08-contact-form",
+      "notes": {
+        "problems": [
+          {
+            "title": "named export 與絕對路徑匯入問題",
+            "problem": "多個元件分散在不同檔案，每次匯入都要寫完整路徑，難以統一管理",
+            "solution": "在 src/components/index.js 統一 re-export 所有元件，讓 FormPage 可以從 src/components 一次匯入多個元件"
+          },
+          {
+            "title": "peer-checked 沒有效果",
+            "problem": "想用 peer-checked 讓 checkbox 勾選後改變其他元素樣式，但畫面沒有反應",
+            "solution": "peer-checked 只能控制 peer 元素後方的同層兄弟元素，調整 JSX 結構確保被控制元素放在 input.peer 之後"
+          },
+          {
+            "title": "checkbox 勾選後 icon 沒有顯示",
+            "problem": "自訂 checkbox 勾選後 SVG icon 未出現，peer-checked:block 無效",
+            "solution": "peer-checked 無法穿透到巢狀元素，改用 Formik 的 field.checked 條件渲染 icon，寫法更穩定且不受 DOM 結構限制"
+          },
+          {
+            "title": "加上 checked 後文字沒有變色",
+            "problem": "在 checkbox input 寫死 checked，peer-checked 樣式仍沒有效果",
+            "solution": "寫死 checked 會讓元件變成無法切換的受控元件，應改用 Formik 的 field spread 或 React state 控制 checked 狀態"
+          },
+          {
+            "title": "textarea 空白送出沒有顯示錯誤",
+            "problem": "Message 欄位空白送出時沒有錯誤訊息",
+            "solution": "確認 message 同時存在於 Formik 的 initialValues 與 Yup 的 validationSchema，並在 FormTextarea 中判斷 meta.touched && meta.error 才顯示錯誤"
+          },
+          {
+            "title": "radio button 如何做成互斥單選",
+            "problem": "兩個 radio 選項各自獨立，無法做到點一個時另一個自動取消",
+            "solution": "同一組 radio 設定相同 name、不同 value，Formik 以 name 對應到同一個欄位，values.queryType 記錄目前選中的 value"
+          },
+          {
+            "title": "Tailwind 的 text-[32] 是否有效",
+            "problem": "使用 text-[32] 設定字級，樣式沒有套用",
+            "solution": "Tailwind arbitrary value 必須包含單位，正確寫法為 text-[32px]；line-height 同理，需寫 leading-[150%] 或 leading-[1.5]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "space-tourism-website",
+      "title": "Space Tourism Multi-page Website",
+      "category": "Multi-page",
+      "summary": "多頁面太空旅遊介紹網站，結合 React Router 動態路由與 useState UI 切換，支援三種斷點背景圖切換",
+      "image": "/images/09-space-tourism-multi-page1.png",
+      "tags": ["React", "Vite", "React Router DOM", "Tailwind CSS", "RWD"],
+      "highlights": [
+        "URL-driven state vs UI state：Destination / Crew 用 useParams 讓網址即狀態，Technology 頁內切換用 useState，依情境選擇不同管理方式",
+        "背景圖片責任分離：Nav 放 App 層共用，各頁面自行管理背景，用 Tailwind responsive class 切換三種斷點圖片",
+        "border-white/25 取代 opacity-25：避免 opacity 連帶影響子元素，改用色彩透明度只讓 border 半透明"
+      ],
+      "demo": "https://09-space-tourism-multi-page-website.vercel.app/",
+      "github": "https://github.com/MiJouHsieh/Frontend-Mentor-Challenges/tree/main/09-space-tourism-multi-page-website",
+      "notes": {
+        "problems": [
+          {
+            "title": "不同頁面背景圖片如何切換",
+            "problem": "四個頁面各有不同背景，且每頁又有 mobile / tablet / desktop 三種圖片，難以在 App 層統一管理",
+            "solution": "背景放在各 page 元件中，用 Tailwind responsive class 在同一個 div 依斷點切換背景圖片，讓每頁自行負責視覺背景"
+          },
+          {
+            "title": "Nav 要放在 App 還是每個頁面中",
+            "problem": "不同頁面有不同背景，不確定 Nav 要跟背景一起放進各頁面，還是拉到外層共用",
+            "solution": "Nav 是全站共用導覽，放在 Routes 外層；背景屬於各頁視覺，放在 page 元件內，兩者責任分離"
+          },
+          {
+            "title": "useParams 切換 Destination / Crew 內容",
+            "problem": "Destination 和 Crew 各有多筆資料，需要根據點擊項目切換內容，且切換後應可直接從網址進入",
+            "solution": "使用動態路由 /destination/:planet，頁面內用 useParams 取得參數再查找對應資料，搭配 fallback 避免無效網址壞掉"
+          },
+          {
+            "title": "useState 控制 Technology 頁面切換",
+            "problem": "Technology 頁面在同一頁切換三個內容，不確定是否也需要路由",
+            "solution": "頁面內部 tab 切換不需要反映在網址上，直接用 useState 管理，初始值設為預設選取項目即可"
+          },
+          {
+            "title": "自訂 1440px breakpoint",
+            "problem": "設計稿有 desktop 1440px，Tailwind 預設無對應斷點",
+            "solution": "在 tailwind.config.js 的 theme.extend.screens 加入 '1440': '1440px'，之後可用 1440: 前綴套用樣式"
+          },
+          {
+            "title": "圖片被固定寬高拉變形",
+            "problem": "同時設定 width 和 height 但比例與原圖不符，圖片被拉伸",
+            "solution": "加上 object-contain 保留圖片比例，或只固定單一方向搭配 w-auto / h-auto 讓另一軸自動計算"
+          },
+          {
+            "title": "h-full 沒有效果",
+            "problem": "子元素設定 h-full 但沒有撐滿高度",
+            "solution": "h-full 依賴父層有明確高度才有作用，改讓父層設定 min-h-screen 或明確 h-screen，子層再接 h-full"
+          },
+          {
+            "title": "半透明 border 但文字不透明",
+            "problem": "在 li 設定 opacity-25 讓外框半透明，但裡面的數字也跟著變透明",
+            "solution": "opacity 會影響整個元素與所有子元素，改用 border-white/25 或 outline-white/25 只讓邊框顏色半透明"
+          },
+          {
+            "title": "設計稿 letter spacing 百分比如何換算",
+            "problem": "設計稿給 letter spacing 15%，CSS 不支援百分比單位",
+            "solution": "將百分比除以 100 換算成 em，15% 對應 0.15em，在 Tailwind 用 tracking-[0.15em] 套用"
+          }
+        ]
+      }
+    },
+    {
       "id": "product-preview-card",
       "title": "Product Preview Card",
       "category": "Card UI",
