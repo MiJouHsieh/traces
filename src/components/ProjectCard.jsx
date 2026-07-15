@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-
 export function ProjectCard({
   id,
   title,
@@ -39,12 +38,12 @@ export function ProjectCard({
       </CardContent>
       <CardFooter className="flex gap-2 p-4 pt-0">
         <Button asChild size="sm">
-          <a href={demo} target="_blank">
+          <a href={demo} target="_blank" rel="noreferrer">
             Live Demo
           </a>
         </Button>
         <Button asChild size="sm" variant="outline">
-          <a href={github} target="_blank">
+          <a href={github} target="_blank" rel="noreferrer">
             GitHub
           </a>
         </Button>
