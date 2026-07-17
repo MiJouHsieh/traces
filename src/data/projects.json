@@ -131,7 +131,7 @@
         "w-full + max-w-* 組合讓卡片在手機有彈性、在大螢幕有最大寬度限制"
       ],
       "demo": "https://frontend-mentor-challenges-12-produ.vercel.app/",
-      "github": "https://github.com/MiJouHsieh/Frontend-Mentor-Challenges",
+      "github": "https://github.com/MiJouHsieh/Frontend-Mentor-Challenges/tree/main/12-product-preview-card-component",
       "notes": {
         "problems": [
           {
